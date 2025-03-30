@@ -4,6 +4,8 @@
 hypervisor:
   # Name of the Lima instance to use
   lima_instance: "default"
+  # Whether to stop the Lima VM when the program exits (defaults to true)
+  shutdown_with_host: true
 
 # Services configuration
 services:

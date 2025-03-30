@@ -78,7 +78,7 @@ func main() {
 
 	// Start services
 	if *verbose {
-		log.Printf("Starting %d services...", len(cfg.Services))
+		log.Printf("Starting %d services...\n", len(cfg.Services))
 	}
 	if err := serviceManager.StartAll(); err != nil {
 		log.Printf("Error starting services: %v", err)
@@ -101,6 +101,18 @@ func main() {
 	}
 	if err := serviceManager.StopAll(); err != nil {
 		log.Printf("Error during shutdown: %v", err)
+	}
+
+	// Stop VM if configured
+	if cfg.Hypervisor.ShutdownWithHost {
+		if *verbose {
+			log.Println("Stopping Lima VM...")
+		}
+		if err := vmManager.Stop(); err != nil {
+			log.Printf("Error stopping VM: %v", err)
+		} else if *verbose {
+			log.Println("VM stopped successfully")
+		}
 	}
 
 	if *verbose {

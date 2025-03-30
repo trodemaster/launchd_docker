@@ -14,13 +14,14 @@ type Config struct {
 }
 
 type HypervisorConfig struct {
-	LimaInstance string `yaml:"lima_instance"`
+	LimaInstance     string `yaml:"lima_instance"`
+	ShutdownWithHost bool   `yaml:"shutdown_with_host"`
 }
 
 type ServiceConfig struct {
 	Name        string `yaml:"name"`
 	Path        string `yaml:"path"`
-	ComposeFile string `yaml:"compose_file"`
+	ComposeFile string `yaml:"compose_file,omitempty"`
 }
 
 func Load(path string) (*Config, error) {
@@ -32,6 +33,11 @@ func Load(path string) (*Config, error) {
 	var config Config
 	if err := yaml.Unmarshal(data, &config); err != nil {
 		return nil, fmt.Errorf("failed to parse config file: %w", err)
+	}
+
+	// Set default value for ShutdownWithHost if not specified
+	if !config.Hypervisor.ShutdownWithHost {
+		config.Hypervisor.ShutdownWithHost = true
 	}
 
 	if err := config.validate(); err != nil {

@@ -83,4 +83,22 @@ func (m *Manager) isRunning() (bool, error) {
 	}
 
 	return false, nil
+}
+
+func (m *Manager) Stop() error {
+	cmd := exec.Command("limactl", "stop", m.instanceName)
+	output, err := cmd.CombinedOutput()
+	if err != nil {
+		return fmt.Errorf("failed to stop VM: %s: %w", string(output), err)
+	}
+	return nil
+}
+
+func (m *Manager) start() error {
+	cmd := exec.Command("limactl", "start", m.instanceName)
+	output, err := cmd.CombinedOutput()
+	if err != nil {
+		return fmt.Errorf("failed to start VM: %s: %w", string(output), err)
+	}
+	return nil
 } 
