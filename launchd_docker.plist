@@ -27,7 +27,7 @@
 </plist>
 <!--
 ln -s /Users/blake/code/machine-cfg/umac/launchd_docker.plist ~/Library/LaunchAgents/launchd_docker.plist
-sudo launchctl bootstrap gui/$UID ~/Library/LaunchAgents/launchd_docker.plist
+launchctl bootstrap gui/$UID ~/Library/LaunchAgents/launchd_docker.plist
 launchctl print gui/$UID/launchd_docker
 launchctl bootout gui/$UID/launchd_docker
 -->
