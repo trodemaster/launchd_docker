@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>Label</key>
+    <string>launchd_docker</string>
+    <key>EnvironmentVariables</key>
+    <dict>
+      <key>PATH</key>
+      <string>/opt/local/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+    </dict>
+    <key>ProgramArguments</key>
+    <array>
+      <string>/usr/local/bin/launchd_docker</string>
+      <string>-config</string>
+      <string>/Users/blake/code/machine-cfg/umac/launchd_docker.yaml</string>
+    </array>
+    <key>StandardErrorPath</key>
+    <string>/Users/blake/Library/Logs/launchd_docker.log</string>
+    <key>StandardOutPath</key>
+    <string>/Users/blake/Library/Logs/launchd_docker.log</string>
+    <key>RunAtLoad</key>
+    <true />
+    <key>KeepAlive</key>
+    <true />
+  </dict>
+</plist>
+<!--
+ln -s /Users/blake/code/machine-cfg/umac/launchd_docker.plist ~/Library/LaunchAgents/launchd_docker.plist
+sudo launchctl bootstrap gui/$UID ~/Library/LaunchAgents/launchd_docker.plist
+launchctl print gui/$UID/launchd_docker
+launchctl bootout gui/$UID/launchd_docker
+-->

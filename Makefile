@@ -8,7 +8,7 @@ BINARY_NAME=launchd_docker
 # Build flags
 LDFLAGS=-ldflags "-s -w"
 
-.PHONY: all clean build build-amd64 build-arm64
+.PHONY: all clean build build-amd64 build-arm64 install help
 
 all: build
 
@@ -24,6 +24,10 @@ build-arm64:
 clean:
 	rm -f $(BINARY_NAME) $(BINARY_NAME)_amd64 $(BINARY_NAME)_arm64
 
+# Install binary to /usr/local/bin/
+install: build
+	sudo install -m 755 $(BINARY_NAME) /usr/local/bin/
+
 # Help target
 help:
 	@echo "Available targets:"
@@ -32,4 +36,5 @@ help:
 	@echo "  build-amd64 - Build for macOS x86_64"
 	@echo "  build-arm64 - Build for macOS arm64"
 	@echo "  clean      - Remove built binaries"
+	@echo "  install    - Install binary to /usr/local/bin/"
 	@echo "  help       - Show this help message" 
