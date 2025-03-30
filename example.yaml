@@ -1,0 +1,20 @@
+# Example configuration file for launchd_docker
+
+# Hypervisor configuration
+hypervisor:
+  # Name of the Lima instance to use
+  lima_instance: "default"
+
+# Services configuration
+services:
+  # Each service is defined with a unique name and its local filesystem path
+  - name: "my-app"
+    path: "/Users/username/projects/my-app"
+  
+  - name: "another-service"
+    path: "/Users/username/projects/another-service"
+
+  # You can add more services as needed
+  - name: "web-service"
+    path: "/Users/username/projects/web-service"
+
